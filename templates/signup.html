@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <link rel="stylesheet" href={{ url_for( 'static', filename='signup.css' ) }} />
+    </header>
+    <body>
+        <h1>Signup For Movie Explorer</h1>
+        <form method="POST" action="/signup">
+            <input type="text" name="username">
+            <input type="submit" value="Sign Up">
+        </form>
+        <a href="/">Login</a>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+body {
+    text-align: center;
+    background-color: lightsalmon;
+    font-family: 'Courier New', monospace;
+}
+
+h1 {
+    color: darkblue;
+    font-size: 50px;
+}
+
+p{
+    color: black;
+    font-size: 20px;
+}
+
+#board{
+    color: black;
+    font-size: small;
+}
+
+#title {
+    color: darkgreen;
+    font-size: 30px;
+    transition: 0.5s;
+}
+
+#title:hover{
+    text-shadow: 0 1px 0 lightgreen, 0 2px 0 lightgreen,
+    0 3px 0 lightgreen, 0 4px 0 lightgreen,
+    0 5px 0 lightgreen, 0 6px 0 lightgreen,
+    0 7px 0 lightgreen, 0 8px 0 lightgreen,
+    0 9px 0 lightgreen, 0 10px 0 lightgreen,
+    0 11px 0 lightgreen, 0 12px 0 lightgreen,
+    0 20px 30px rgba(0, 0, 0, 0.5);
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+}
+

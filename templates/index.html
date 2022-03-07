@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link rel="stylesheet" href={{ url_for( 'static', filename='style.css' ) }} />
+    </head>
+
+    <body>
+        <h1>Movie Informition Displayer</h1>
+        <div> 
+            <p1 id=title><b>{{ title}}</b></p1>
+            <p>{{tagline}}</p>
+            <p>{{genre}}</p>
+            <img src={{image}}>
+            <p2>
+                <button><a href={{title_search}}>Click Here Please For Wiki Page</a></button>
+            </p2>
+            <p3>
+                <button><a href='https://www.themoviedb.org/movie/{{movie}}'>Click Here To See Movie</a></button>
+            </p3>
+            <p4>
+                <button><a href='https://www.themoviedb.org/movie/{{site}}'>Click Here To See Similar Movie</a></button>
+            </p4>
+        </div>
+        <a href="/logout">Logout</a>
+        <form method="POST" action="/main">
+            <label for="movie_id">Movie ID:</label>
+            <input type="text" name="movie_id" placeholder="{{movie_id}}">
+            <label for="comment">Comment:</label>
+            <input type="text" name="comment">
+            <label for="rating">Rating:</label>
+            <input type="text" name="rating">
+            <input type="submit" value="Submit" onsubmit="return false">
+        </form>
+        <h2>Reviews Board:</h2>
+            {% for i in range(num_reviews) %}
+                {% if reviews[i].movie_id == movie_id %} 
+                    <p id=board>{{ reviews[i].username }}</p>
+                    <p id=board>{{ reviews[i].rating }}/10</p>
+                    <p id=board>{{ reviews[i].comment }}</p>
+                {% endif %}
+            {% endfor %}
+    </body>
+</html>
