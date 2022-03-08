@@ -21,6 +21,9 @@
             <p4>
                 <button><a href='https://www.themoviedb.org/movie/{{site}}'>Click Here To See Similar Movie</a></button>
             </p4>
+            <p5>
+                <button><a href='/index'>Fact</a></button>
+            </p5>
         </div>
         <a href="/logout">Logout</a>
         <form method="POST" action="/main">
@@ -30,7 +33,7 @@
             <input type="text" name="comment">
             <label for="rating">Rating:</label>
             <input type="text" name="rating">
-            <input type="submit" value="Submit" onsubmit="return false">
+            <input type="submit" value="Submit">
         </form>
         <h2>Reviews Board:</h2>
             {% for i in range(num_reviews) %}

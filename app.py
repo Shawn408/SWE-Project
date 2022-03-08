@@ -10,10 +10,16 @@ from dotenv import load_dotenv,find_dotenv
 from tmdb import get_movie_info
 from wiki import wiki_link_search
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 
 load_dotenv(find_dotenv())
+
+bp = flask.Blueprint(
+    "bp",
+    __name__,
+    template_folder="./static/react",
+)
 
 url = os.getenv("DATABASE_URL") 
 if url.startswith("postgres://"):
@@ -96,7 +102,7 @@ def index():
         
 
         return render_template(
-            'index.html',
+            'main.html',
             movie_id=movie_data['movie_id'], 
             title = movie_data['title'],
             tagline = movie_data['tagline'],
@@ -125,6 +131,24 @@ def signup():
 def logout():
     logout_user()
     return flask.redirect(("/"))
+
+@bp.route("/index")
+@login_required
+def index():
+    return flask.render_template("index.html")
+
+@app.route("/fact", methods = ["GET", "POST"])
+@login_required
+def fact():
+    fun_facts = [
+        "There are 132 rooms, 35 bathrooms, and 6 levels in the White House.",
+        "It is a myth that it is dangerous to wake up a sleepwalker because it may cause them a heart attack, shock, brain damage, or something else. It is not a myth that it is dangerous to wake up a sleepwalker because of the possible injury the sleepwalker may inflict upon themselves or the person waking them up.",
+        "In humans for example, the skin located under the eyes and around the eyelids is the thinnest skin in the body at 0.5 mm thick, and is one of the first areas to show signs of aging such as 'crows feet' and wrinkles."
+        ]
+    fun_fact = random.choice(fun_facts)
+    return flask.jsonify({"fact": fun_fact})
+   
+app.register_blueprint(bp)
 
 app.run(
     host=os.getenv('IP', '0.0.0.0'),
