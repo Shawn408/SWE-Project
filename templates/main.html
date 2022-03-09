@@ -21,9 +21,6 @@
             <p4>
                 <button><a href='https://www.themoviedb.org/movie/{{site}}'>Click Here To See Similar Movie</a></button>
             </p4>
-            <p5>
-                <button><a href='/index'>Fact</a></button>
-            </p5>
         </div>
         <a href="/logout">Logout</a>
         <form method="POST" action="/main">
@@ -36,6 +33,7 @@
             <input type="submit" value="Submit">
         </form>
         <h2>Reviews Board:</h2>
+        <p><button><a href='/index'>Edit User Comments</a></button></p>
             {% for i in range(num_reviews) %}
                 {% if reviews[i].movie_id == movie_id %} 
                     <p id=board>{{ reviews[i].username }}</p>
