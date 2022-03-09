@@ -1,19 +1,28 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function App() {
-  const [review, setReview] = useState();
-  const handleClick = () => {
-    fetch("/edit")
-      .then(response => response.json())
-      .then(data => { console.log(data); });
-  }   
-    
+  const [review, setReview] = useState([]);
+  useEffect(() => {
+    fetch("/edit", { method: "POST" }).then((response) => 
+      response.json().then((data) => { 
+        setReview(data.review);
+      })
+    );
+  })
+
   return (
     <div className="App">
       <h1>Your Reviews:</h1>
-
-      <button onClick={handleClick}>Click me!</button>
+      <table>
+        {review && review.map((review) => 
+          <tr>
+            <tb>{review.movie_id}</tb>
+            <tb>{review.rating}</tb>
+            <tb>{review.comment}</tb>
+          </tr>
+          )}
+      </table>
     </div>
   );
 }

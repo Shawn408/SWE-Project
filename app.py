@@ -149,7 +149,6 @@ def edit():
         reviewDict["rating"] = i.rating
         reviewDict["comment"] = i.comment
         reviewList.append(reviewDict)
-    print(reviewList)
     return flask.jsonify({"review":reviewList})
    
 app.register_blueprint(bp)
