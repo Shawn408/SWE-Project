@@ -2,19 +2,17 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  const [fact, setFact] = useState(" ");
-  function handleClick() {
-    fetch("/fact", { method: "POST" }).then((response) => 
-      response.json().then((data) => { 
-        setFact(data.fact);
-        console.log(data.fact);
-      })
-    );
-  }
+  const [review, setReview] = useState();
+  const handleClick = () => {
+    fetch("/edit")
+      .then(response => response.json())
+      .then(data => { console.log(data); });
+  }   
+    
   return (
     <div className="App">
-      <h1>Fun Fact</h1>
-      <p>{fact}</p>
+      <h1>Your Reviews:</h1>
+
       <button onClick={handleClick}>Click me!</button>
     </div>
   );

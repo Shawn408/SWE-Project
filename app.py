@@ -137,16 +137,20 @@ def logout():
 def index():
     return flask.render_template("index.html")
 
-@app.route("/fact", methods = ["GET", "POST"])
+@app.route("/edit", methods = ["GET", "POST"])
 @login_required
-def fact():
-    fun_facts = [
-        "There are 132 rooms, 35 bathrooms, and 6 levels in the White House.",
-        "It is a myth that it is dangerous to wake up a sleepwalker because it may cause them a heart attack, shock, brain damage, or something else. It is not a myth that it is dangerous to wake up a sleepwalker because of the possible injury the sleepwalker may inflict upon themselves or the person waking them up.",
-        "In humans for example, the skin located under the eyes and around the eyelids is the thinnest skin in the body at 0.5 mm thick, and is one of the first areas to show signs of aging such as 'crows feet' and wrinkles."
-        ]
-    fun_fact = random.choice(fun_facts)
-    return flask.jsonify({"fact": fun_fact})
+def edit():
+    current_account = current_user.username
+    reviewLog = Review.query.filter_by(username=current_account).all()
+    reviewList = []
+    for i in reviewLog:
+        reviewDict = {}
+        reviewDict["movie_id"] = i.movie_id
+        reviewDict["rating"] = i.rating
+        reviewDict["comment"] = i.comment
+        reviewList.append(reviewDict)
+    print(reviewList)
+    return flask.jsonify({"review":reviewList})
    
 app.register_blueprint(bp)
 
