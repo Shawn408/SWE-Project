@@ -132,7 +132,7 @@ def logout():
     logout_user()
     return flask.redirect(("/"))
 
-@bp.route("/index")
+@bp.route("/reviews", methods = ["GET", "POST"])
 @login_required
 def index():
     return flask.render_template("index.html")
@@ -145,6 +145,7 @@ def edit():
     reviewList = []
     for i in reviewLog:
         reviewDict = {}
+        reviewDict["id"] = i.id
         reviewDict["movie_id"] = i.movie_id
         reviewDict["rating"] = i.rating
         reviewDict["comment"] = i.comment

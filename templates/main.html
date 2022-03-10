@@ -33,7 +33,7 @@
             <input type="submit" value="Submit">
         </form>
         <h2>Reviews Board:</h2>
-        <p><button><a href='/index'>Edit User Comments</a></button></p>
+        <p><button><a href='/reviews'>Edit User Comments</a></button></p>
             {% for i in range(num_reviews) %}
                 {% if reviews[i].movie_id == movie_id %} 
                     <p id=board>{{ reviews[i].username }}</p>
