@@ -7,14 +7,31 @@ function App() {
     fetch("/edit", { method: "POST" }).then((response) => 
       response.json().then((data) => { 
         setReview(data.review);
-        console.log(data.review);
       })
     );
-  })
+  },[setReview])
   function handleDelete(id) {
-    console.log(id);
-    const newReview = review.filter(review => review.id !== id);
+    const newReview = review.filter((review) => review.id !== id);
     setReview(newReview);
+  }
+  
+  function handleChange(comment){
+    const newReviews = review
+    let newReview = comment;
+    newReview.review = newReview;
+    setReview(newReview);
+  }
+
+  function saveChange(stateData){
+    fetch("/save", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify(stateData)
+      })
+      .then((response) => {return response.json()})
+      .then(alert("Save Successfully"))
   }
 
 return (
@@ -24,13 +41,14 @@ return (
         <table>
           {review && review.map((review) => 
             <tr>
-              <tb>{review.movie_id}</tb>&nbsp;
-              <tb><input type="text" defaultValue={review.rating} size ="3"></input></tb>
-              <tb><input type="text" defaultValue={review.comment}></input></tb>
-              <tb><button onClick = {() => handleDelete(review.id)}>Delete</button></tb>
+              <td>{review.movie_id}</td>&nbsp;
+              <td><input type="text" defaultValue={review.rating} size ="3" onChange={(e) => handleChange(e.target.value)}></input></td>
+              <td><input type="text" defaultValue={review.comment} onChange={(e) => handleChange(e.target.value)}></input></td>
+              <td><button onClick = {() => handleDelete(review.id)}>Delete</button></td>
             </tr>
-            )}
+          )}
         </table>
+        <button onClick = {() => saveChange(review)}>Save</button>
       </center>
     </div>
   );

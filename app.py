@@ -151,7 +151,27 @@ def edit():
         reviewDict["comment"] = i.comment
         reviewList.append(reviewDict)
     return flask.jsonify({"review":reviewList})
-   
+
+@app.route("/save", methods = ["GET", "POST"])
+@login_required
+def save():
+    if flask.request.method == "POST":
+        Review.query.filter_by(username=current_user.username).delete()
+        db.session.commit()
+        stateData = flask.request.json
+        for i in stateData:
+            movie_id = i["movie_id"]
+            rating = i["rating"]
+            comment = i["comment"]
+            db.session.add(Review(
+                username = current_user.username,
+                movie_id=movie_id,
+                rating=rating,
+                comment=comment
+            ))
+            db.session.commit()
+    return flask.redirect(flask.url_for('index'))
+
 app.register_blueprint(bp)
 
 app.run(
