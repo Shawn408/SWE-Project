@@ -42,8 +42,8 @@ return (
           {review && review.map((review) => 
             <tr>
               <td>{review.movie_id}</td>&nbsp;
-              <td><input type="text" defaultValue={review.rating} size ="3" onChange={(e) => handleChange(e.target.value)}></input></td>
-              <td><input type="text" defaultValue={review.comment} onChange={(e) => handleChange(e.target.value)}></input></td>
+              <td><input type="text" defaultValue={review.rating} size ="3" onChange={(e) => setReview(e.target.value)}></input></td>
+              <td><input type="text" defaultValue={review.comment} onChange={(e) => setReview(e.target.value)}></input></td>
               <td><button onClick = {() => handleDelete(review.id)}>Delete</button></td>
             </tr>
           )}
