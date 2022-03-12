@@ -10,18 +10,24 @@ function App() {
       })
     );
   },[setReview])
+  
   function handleDelete(id) {
     const newReview = review.filter((review) => review.id !== id);
     setReview(newReview);
   }
-  
-  function handleChange(comment){
-    const newReviews = review
-    let newReview = comment;
-    newReview.review = newReview;
+
+  function handleEdit(e){
+    const newRating = e.target.rating.value;
+    const newReview = review.map((review) => {
+      if(review.id === e.target.id.defaultValue){
+        newRating = review.rating;
+      }
+      return review;
+    }
+    );
     setReview(newReview);
   }
-
+  
   function saveChange(stateData){
     fetch("/save", {
       method: "POST",
@@ -42,8 +48,8 @@ return (
           {review && review.map((review) => 
             <tr>
               <td>{review.movie_id}</td>&nbsp;
-              <td><input type="text" defaultValue={review.rating} size ="3" onChange={(e) => setReview(e.target.value)}></input></td>
-              <td><input type="text" defaultValue={review.comment} onChange={(e) => setReview(e.target.value)}></input></td>
+              <td><input type="number" defaultValue={review.rating}></input></td>
+              <td><input type="text" defaultValue={review.comment}></input></td>
               <td><button onClick = {() => handleDelete(review.id)}>Delete</button></td>
             </tr>
           )}
